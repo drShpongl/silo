@@ -2,7 +2,6 @@
 set -e
 
 TAG=$1
-VERSION=$2
 
 if [ -z "$1" ]
   then
@@ -16,13 +15,14 @@ web
 '
 
 # #Build
-docker build --build-arg TAG=${TAG}  -f tools/dockerfile --pull .
+docker build -f tools/dockerfile --pull .
 
 for ITEM in $SERVICES; do 
-	docker build --build-arg TAG=${TAG} -f tools/dockerfile --target=${ITEM} -q .
+  docker build -f tools/dockerfile -t ${ITEM}:${TAG} --target=${ITEM} -q .
+	# docker build -f tools/dockerfile -t ${TAG} --target=${ITEM} -q .
 done
 
 # #Publish
 # for ITEM in $SERVICES; do
-#       docker push registry/silo/${ITEM}:${TAG}-${VERSION}
+#       docker push registry/silo/${ITEM}:${TAG}
 # done

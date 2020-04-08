@@ -2,11 +2,15 @@ version: "3.7"
 
 services:
   web:
-    image: web
+    image: web:${tag}
+    restart: always
+    depends_on:
+      - host
     ports:
       - 8080:5000
 
   host:
-    image: host
+    image: host:${tag}
+    restart: always
     ports:
       - 8081:8081

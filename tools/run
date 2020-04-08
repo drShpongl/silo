@@ -1,0 +1,13 @@
+#!/bin/sh
+
+TAG=$1
+
+if [ -z "$1" ]
+  then
+    echo "No argument supplied"
+    exit 1
+fi
+
+export tag=${TAG}
+
+docker-compose -f docker-compose.yml -p silo up -d

@@ -1,11 +1,11 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 as host
 COPY . /app
 WORKDIR /app
 RUN dotnet publish host/host.csproj -c Release -o dist
 WORKDIR /app/dist
 ENTRYPOINT ["./host"]
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 as web
 COPY . /app
 WORKDIR /app
 RUN dotnet publish web/web.csproj -c Release -o dist
