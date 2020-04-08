@@ -1,6 +1,6 @@
 using System;
 
-namespace web
+namespace igrains
 {
     public class TestModel
     {
