@@ -1,0 +1,28 @@
+#!/bin/sh
+set -e
+
+TAG=$1
+VERSION=$2
+
+if [ -z "$1" ]
+  then
+    echo "No argument supplied"
+    exit 1
+fi
+
+SERVICES='
+host
+web
+'
+
+# #Build
+docker build --build-arg TAG=${TAG}  -f tools/dockerfile --pull .
+
+for ITEM in $SERVICES; do 
+	docker build --build-arg TAG=${TAG} -f tools/dockerfile --target=${ITEM} -q .
+done
+
+# #Publish
+# for ITEM in $SERVICES; do
+#       docker push registry/silo/${ITEM}:${TAG}-${VERSION}
+# done

@@ -1,0 +1,12 @@
+version: "3.7"
+
+services:
+  web:
+    image: web
+    ports:
+      - 8080:5000
+
+  host:
+    image: host
+    ports:
+      - 8081:8081
